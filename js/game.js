@@ -19,10 +19,12 @@ const createElement = (tag, className) => {
   return element;
 }
 
-const createCard = () => {
+const createCard = (characters) => {
   const card = createElement('div','card');
   const front = createElement('div','face front');
   const back = createElement('div', 'face back');
+
+  front.style.backgroundImage = `url(../images/${characters}.png)`;
 
   card.appendChild(front);
   card.appendChild(back);
@@ -31,9 +33,13 @@ const createCard = () => {
 }
 
 const loadGame = () => {
-  characters.forEach((characters) => {
+  const duplicateCharacters = [...characters, ...characters];
 
-    const card = createCard();
+  const shuffledArray = duplicateCharacters.sort(() => Math.random() - 0.5);
+
+  
+  shuffledArray.forEach((characters) => {
+    const card = createCard(characters);
     grid.appendChild(card);
   });
 
